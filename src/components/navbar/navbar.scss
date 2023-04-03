@@ -1,0 +1,141 @@
+@import '../../style.scss';
+
+.navbar{
+    @include themify($themes){
+    //background-color: rgb(228, 141, 10);
+    background-color: themed("bg");
+
+    color:themed('textColor');
+    border-bottom: 1px solid themed('border');
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:15px 20px; 
+    height: 30px;
+    position: sticky;
+    top: 0;
+   z-index: 500;
+       
+    .left_navbar{
+        gap: 20px;
+        display: flex;
+        align-items: center;
+        
+        .logo{
+            
+            width: 120px;
+            height: 25px;
+        }
+
+        .results{
+            position: sticky;
+            margin-top: 150px;
+            display: flex;
+            flex-direction: column;
+           
+            
+            
+        .search{
+          
+            display: flex;
+            align-items: center;
+            border: 1px solid themed('border');
+            border-radius: 23px;
+            gap:10px;
+            padding: 5px;
+            
+            
+
+            input{
+                border:none;
+                width: 500px;
+                color:themed('textColor');
+                background-color: transparent;
+                
+                
+                
+            }
+        }
+
+        .second{
+            height: 150px;
+        }
+
+        .result{
+            position: sticky;
+            height: 150px;
+            display: flex;
+            border-radius: 22px;
+            gap: 10px;
+            flex-direction: column;
+            background-color: white;
+            overflow:scroll;
+           // align-items: center;
+
+           .r{
+               display: flex;
+               align-items: center;
+               gap: 10px;
+               
+            img{margin-left: 10px;
+                margin-top:10px ;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            span{
+                font-size: 17px;
+                font-weight: 600;
+            }
+        }
+        }  
+    
+    
+    }
+        
+
+    }
+
+    .right_navbar{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+       
+        .dot{
+            position: absolute;
+            color: red;
+            font-size: 50px;
+            right: 198.5px;
+            z-index: 999;
+            top: -7.5px;
+            cursor: pointer;
+        }
+
+        .user{
+            gap:7px;
+            display: flex;
+            align-items: center;
+            .userPicture{
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                object-fit: cover;
+
+            }
+            .logout{
+                cursor: pointer;
+                color: rgb(0, 0, 0);
+                background-color: none;
+
+            }
+
+        }
+
+
+    }
+
+
+
+}
+}

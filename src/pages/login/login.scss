@@ -1,0 +1,151 @@
+
+html,body{
+    margin: 0;
+}
+.login{
+  
+   background-color: rgb(0, 0, 0);
+     background : url("https://cdn.wallpapersafari.com/20/85/tWMisT.jpg");
+    background-repeat: no-repeat;
+     background-size: cover;
+    
+   
+   height: 100vh;
+
+    //background-color: aquamarine;
+    display: flex;
+    align-items: center;
+   justify-content: center;
+    
+    
+
+    .card{
+        //background: linear-gradient(rgb(242, 255, 54),rgb(121, 122, 19)); 
+       
+        width: 50%;
+     
+       
+     //  background-color: white;
+       //background-color:rgba(248, 153, 89, 0.63);
+    //   background-color:rgba(196, 117, 65, 0.575);
+       border-radius: 30px;
+       
+        min-height: 60vh;
+        display: flex;
+        border-color: black;
+        
+        .hammer{
+            width: 25%;
+            padding-left: 40px;
+            margin-top: 0;
+            padding-top: 0;
+            
+            
+        }
+
+
+        .left{
+            
+           background-color: rgba(243, 134, 45, 0.938);;
+           //background-color: rgba(255, 255, 255, 0.89);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+           
+            
+            flex:1;   //flex-grow toplanir ve hecm ona uygun bolunur meselen left ve right 1 1 olsa ikiside eyni qeder olasidi
+         
+            .logodiv{
+                flex:1;
+                margin-top: 130px;
+                
+           
+                
+            .logo{  
+              
+                width: 20vw;
+                height: 10vh;
+                
+                
+                
+                
+                
+            } 
+        }
+            .yazilar{
+               
+                display: flex;
+                flex-direction: column;
+                span{
+                    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                    font-size: 23px;
+                    margin-bottom: 15px;
+                    margin-top: 30px;
+                    color:rgb(0, 0, 0)
+                    
+                    
+                }
+                button{
+                    background:none;
+                    border-color: black ;
+                    width: 50%;
+                  
+                  
+                    cursor: pointer;
+                    color: rgb(255, 255, 255);
+                    font-size: 17px;
+                    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                }
+
+                flex: 2;
+            }
+            
+        }
+
+
+        .right{
+           
+            background-color: rgba(255, 255, 255, 0.89);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            h1{ 
+                font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                font-size: 65px;
+                
+            }   
+            form{
+                display: flex;
+                flex-direction: column;
+                gap: 60px;
+                input{
+
+                    border:none;
+                    border-bottom: 1px solid rgb(0, 0, 0);
+                    background:none;
+                    color:rgb(0, 0, 0)
+                }
+                button{
+                    border-radius: 10px;
+                    padding: 3px;
+                    border-color: gray;
+                    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                }
+
+            }
+         
+            flex: 1;
+            
+        }
+
+
+
+    }
+
+
+
+}
