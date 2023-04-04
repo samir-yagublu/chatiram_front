@@ -1,5 +1,5 @@
 import "./login.scss"
-import logo from '/home/kali/Desktop/chatiram_project/chatiram/src/images/chatiram.png'
+import logo from "../../images/chatiram.png"
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext} from "../../context/authContext";
 import { useContext } from "react";
