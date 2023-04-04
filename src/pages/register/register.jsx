@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./register.scss"
-import logo from '/home/kali/Desktop/chatiram_project/chatiram/src/images/chatiram.png'
+import logo from '../../images/chatiram.png'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useEffect } from "react";
