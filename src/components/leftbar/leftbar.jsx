@@ -1,9 +1,9 @@
 import "./leftbar.scss"
-import car_mechanic from '/home/kali/Desktop/chatiram_project/chatiram/src/images/car_mechanic.png'
-import temir from '/home/kali/Desktop/chatiram_project/chatiram/src/images/temir.png'
-import washing from '/home/kali/Desktop/chatiram_project/chatiram/src/images/washing.png'
-import pc from '/home/kali/Desktop/chatiram_project/chatiram/src/images/pc.png'
-import furniture from '/home/kali/Desktop/chatiram_project/chatiram/src/images/furniture.png'
+import car_mechanic from '../../images/car_mechanic.png'
+import temir from '../../images/temir.png'
+import washing from '../../images/washing.png'
+import pc from '../../images/pc.png'
+import furniture from '../../images/furniture.png'
 import { Link } from 'react-router-dom';
 const leftbar = ()=>{
 
