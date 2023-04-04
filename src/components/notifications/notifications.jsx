@@ -60,10 +60,7 @@ const Notificatins = ({notify})=>{
     await showLocation();
     await axios.put(`${HOST}/api/orders`, { personalID: notify.USERID }, { withCredentials: true });
     
-    // Wait for 3 seconds before redirecting
-    setTimeout(() => {
-      window.location.href = `/profile/${notify.USERID}`;
-    }, 4000);
+  
   }
 
 const decline = async (event)=>{
