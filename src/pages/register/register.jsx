@@ -194,7 +194,7 @@ const Register = ()=>{
                                             <option value='other'>Other</option>
                                             </select> 
                                         </div>
-                                       {err}
+                                        {err && err}
                                         <button onClick={handleClick} >Register</button>
 
                                     </form>

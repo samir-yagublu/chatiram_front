@@ -47,7 +47,7 @@ const Comments = ({postId, flag, setFlag}) => {
 
         <div className="comments">
             <div className="write">
-                <img src={"../client/"+currentUser.profilePic} alt="" />
+                <img src={currentUser.profilePic} alt="" />
                 <input type="text" name="" placeholder='Write comment ...' value={description}  onChange={(e)=>{ setdescription(e.target.value) }}/>
                 <button onClick={handleClick}>Send</button>
 
@@ -55,7 +55,7 @@ const Comments = ({postId, flag, setFlag}) => {
           { isLoading ? "Loading..." : data.map(comment=>(
              
              <div className='comment'>
-                 <img src={"../client/"+comment.profilePic} alt="" />
+                 <img src={comment.profilePic} alt="" />
                  <div className="info">
                      <span>{comment.name}</span>
                      <p>{comment.description}</p>

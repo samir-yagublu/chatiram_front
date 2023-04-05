@@ -16,51 +16,42 @@ const Notificatins = ({notify})=>{
   }
   
 
-  const showLocation = async ()=>{
+  const showLocation = async () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition( async (position) => {
+      try {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
         const { latitude, longitude } = position.coords;
         const locationData = await location();
-        console.log(locationData.length)
-          if(locationData.length) {
-  
-            axios.put(`${HOST}/api/locations`, {latitude, longitude, userID: currentUser.id}, { withCredentials: true })
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-            
-          
+        console.log(locationData.length);
+        if (locationData.length) {
+          const response = await axios.put(`${HOST}/api/locations`, { latitude, longitude, userID: currentUser.id }, { withCredentials: true });
+          console.log(response.data);
         } else {
-          axios.post(`${HOST}/api/locations`, {latitude, longitude, userID: currentUser.id}, { withCredentials: true })
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-          
-        } 
-      
-      
-      });  
+          const response = await axios.post(`${HOST}/api/locations`, { latitude, longitude, userID: currentUser.id }, { withCredentials: true });
+          console.log(response.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     } else {
-      console.log('Location is not supported')
+      console.log('Location is not supported');
     }
-
-
-  }
+  };
 
 
 
   const accept = async (event) => {
+    console.log('clicked accept button')
     event.preventDefault();
     await showLocation();
-    await axios.put(`${HOST}/api/orders`, { personalID: notify.USERID }, { withCredentials: true });
-    
-  
+    const data = await axios.put(`${HOST}/api/orders`, { personalID: notify.USERID }, { withCredentials: true });
+    console.log(data)
+    // Wait for 3 seconds before redirecting
+    // setTimeout(() => {
+    //   window.location.href = `/profile/${notify.USERID}`;
+    // }, 4000);
   }
 
 const decline = async (event)=>{

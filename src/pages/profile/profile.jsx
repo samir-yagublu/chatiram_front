@@ -138,7 +138,7 @@ const Profile = ()=>{
                 {userID == currentUser.id ? ( <button className="edit" onClick={()=>{setEdit(true)}}>edit</button> ) : ( fisLoading ? "...loading" : 
               (  fdata.includes(currentUser.id) ? 
                  ( <button onClick={handleFollow} className="following">following</button> )  : (<button onClick={handleFollow} className="edit">follow</button>) ) ) }  
-                <img src={'../client/' + data.profilePic} alt="Profile Picture" className="profilePic"></img>
+                <img src={data.profilePic} alt="Profile Picture" className="profilePic"></img>
                 <span className="info"><span className="number">{postnisLoading ? 'Loading...' : postndata.length}</span> Posts</span>
            {fisLoading ? "...loading" : (     <span className="info"><span className="number">{fdata.length}</span> Followers</span>   ) }
                 <span className="info"><span className="number">{followingisLoading ? 'Loading...' : followingdata.length}</span> Following</span>
@@ -162,7 +162,8 @@ const Profile = ()=>{
             <div className="call">
        { data.type == 'usta' && data.id != currentUser.id &&  ( orderisLoading ? 'Loading' : (orderData.includes(currentUser.id) ? 
       ( <div className="Order">
-         { !isAccepted ? "" : (isAccepted[0].isAccepted == 1 ? 
+         { acceptedLoading ? '...Loading' : (
+           isAccepted.length && ( isAccepted[0].isAccepted == 1 ? 
          <div>Usta has been accepted your order , please wait 
            <button onClick={handleOrder}>Cancel</button>
 
@@ -171,7 +172,7 @@ const Profile = ()=>{
     
        <button onClick={handleOrder}>Cancel</button> </div>
          
-         )  )}
+         )  )  )  }
          </div> ) : <button onClick={handleOrder}>Make order</button>  )) }
         </div>
     

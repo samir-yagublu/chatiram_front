@@ -4,6 +4,19 @@ import { AuthContext } from '../../context/authContext';
 import './update.scss';
 import axios from 'axios';
 import {useMutation,  useQueryClient} from 'react-query';
+
+import moment from 'moment';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+
+import { storage } from "../../firebase";
+
+
 const Update = ({setEdit,user})=>{
 const {currentUser} = useContext(AuthContext);
 const HOST = process.env.REACT_APP_HOST;
@@ -30,33 +43,37 @@ const queryClient = useQueryClient();
       } 
   })
 
-const upload = async ()=>{
-
-    try{
-      const formData = new FormData();
-      formData.append("file",file);
-      //console.log('upload in icinde')
-      const res = await axios.post(`${HOST}/api/upload`, formData,{withCredentials:true});
-      
-      return res.data;
-    }
-    catch(err){console.log(err)}
-    
-      }
+  
+  const upload = async () => {
+  
+    console.log("uploading file:", file.name);
+    const imageRef = ref(storage, `images/${file.name + Date.now()}`);
+    const snapshot = await uploadBytes(imageRef, file);
+    console.log("file uploaded:", snapshot.ref.fullPath);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    console.log("download URL:", downloadURL);
+  
+    return downloadURL;
+  };
 
       const handleClick = async (e)=>{
         e.preventDefault();
+        console.log("file =  " + file);
         let imgUrl = user.profilePic;
-        if(file) imgUrl = await upload() 
+        if(file) imgUrl =  await upload();
+        
+        
+        
         mutation.mutate({ ...inputs, profilePic:imgUrl } );
         setEdit(false);
+
       }
 const fileChange = (e)=>{
     setFile(e.target.files[0])
 }
 
 //console.log(file)
-console.log(user);
+//console.log(user);
     return(
         <div  className='update'>
             <h1>Editing </h1>

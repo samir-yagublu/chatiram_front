@@ -102,7 +102,7 @@ getData();
 
                   {result ?   result.map( res => (
                     <div className='r'>
-                        <img src={"../client/" + res.profilePic} alt="" />
+                        <img src={res.profilePic} alt="" />
                         
                         <Link to={`/profile/${res.id}`} onClick={handleProfileLink}>
                             <span>{res.username}</span>
@@ -137,7 +137,7 @@ getData();
 
                 <CircleNotificationsIcon/>
                 <div className="user">
-                    <img src={"../client/" + currentUser.profilePic} alt="User picture" className="userPicture" />
+                    <img src={currentUser.profilePic} alt="User picture" className="userPicture" />
                     <span>{currentUser.username}</span>
                     <Link to='/login'  >
                     <button className="logout" onClick={Logout}>logout</button> </Link>

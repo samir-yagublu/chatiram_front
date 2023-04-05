@@ -4,13 +4,22 @@ import { useContext } from 'react';
 import axios from 'axios'
 import {useQuery,useMutation,  useQueryClient} from 'react-query';
 import { useState } from "react";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+
+import { storage } from "../../firebase";
 
 const Stories = ()=>{
   const [imageSrc, setImageSrc] = useState(null);
   const HOST = process.env.REACT_APP_HOST;
     const handleChange = (e)=>{
       e.preventDefault();
-      setFilen(e.target.files[0]);
+      setFile(e.target.files[0]);
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = () => {
@@ -20,7 +29,7 @@ const Stories = ()=>{
     }
     const {currentUser} = useContext(AuthContext);
 
-      const [filen,setFilen] = useState(null);
+      const [file,setFile] = useState(null);
 
   const { isLoading, error, data } = useQuery(['stories',currentUser.id], () =>
     
@@ -46,18 +55,19 @@ const Stories = ()=>{
          } 
      })
 
-     const upload = async ()=>{
+     
 
-    try{
-      const formData = new FormData();
-      formData.append("filen",filen);
-      //console.log('story uploadin icinde')
-      const res = await axios.post(`${HOST}/api/upload/story`,formData, {withCredentials:true});
-      return res.data;
-    }
-    catch(err){console.log(err)}
-    
-      }
+      const upload = async () => {
+  
+        console.log("uploading file:", file.name);
+        const imageRef = ref(storage, `images/${file.name + Date.now()}`);
+        const snapshot = await uploadBytes(imageRef, file);
+        console.log("file uploaded:", snapshot.ref.fullPath);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        console.log("download URL:", downloadURL);
+      
+        return downloadURL;
+      };
 
 const handleClick = async (e)=>{
   e.preventDefault();
@@ -65,7 +75,7 @@ const handleClick = async (e)=>{
       imgUrl = await upload();
       //console.log(filen)
       mutation.mutate({img:imgUrl});
-      setFilen(null);
+      setFile(null);
 
 
 }
@@ -82,7 +92,7 @@ const deleteStory = ()=>{
         <div className='stories'>
             <div className='story'>
               
-                   { filen ? ( <img src={imageSrc} alt="Selected Image" />) : (<img src={'../client/'+currentUser.profilePic} alt="story"  />)   }
+                   { file ? ( <img src={imageSrc} alt="Selected Image" />) : (<img src={currentUser.profilePic} alt="story"  />)   }
                    {/* <img src={currentUser.profilePic} alt="story"  /> */}
                     <span >{currentUser.name}</span>
                    
@@ -99,7 +109,7 @@ const deleteStory = ()=>{
                                             //map islenende key vermeliyik (mecburi deyil)
                 <div className='story' > 
                   {story.id  == currentUser.id ?  <button className='delete' onClick={deleteStory}>Delete</button>  : '' }
-                    <img src={"./client/" + story.img} alt="story"  />
+                    <img src={story.img} alt="story"  />
                     <span >{story.username} </span>
                    
                  

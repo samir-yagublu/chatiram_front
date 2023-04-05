@@ -6,6 +6,17 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/authContext.js";
 import { useState } from "react";
 import axios from "axios";
+import moment from 'moment';
+import { v4 } from "uuid";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+
+import { storage } from "../../firebase";
 
 import {useMutation,  useQueryClient} from 'react-query';
 
@@ -31,27 +42,31 @@ const Share = () => {
   const [file,setFile] = useState(null);
   const [description,setdescription] = useState("");
   const [type,setType] = useState("car");
-  const upload = async ()=>{
-
-    try{
-      const formData = new FormData();
-      formData.append("file",file);
-      console.log('upload in icinde')
-      const res = await axios.post(`${HOST}/api/upload`, formData,{withCredentials:true});
+  const [url,setUrl] = useState(null)
+const upload = async () => {
+  
+  console.log("uploading file:", file.name);
+  const imageRef = ref(storage, `images/${file.name + Date.now()}`);
+  const snapshot = await uploadBytes(imageRef, file);
+  console.log("file uploaded:", snapshot.ref.fullPath);
+  const downloadURL = await getDownloadURL(snapshot.ref);
+  console.log("download URL:", downloadURL);
+  setUrl(downloadURL);
+  return downloadURL;
+};
       
-      return res.data;
-    }
-    catch(err){console.log(err)}
-    
-      }
-
   const handleClick = async (e)=>{
     e.preventDefault();
     let imgUrl = '';
-    if(file) imgUrl = await upload() 
+    console.log(file);
+    if(file) imgUrl =  await upload();
+    console.log('Img url' + imgUrl); 
+   
+
     mutation.mutate({description,type, img:imgUrl});
     setdescription("");
     setFile(null);
+    setUrl(null);
 
   }
   const {currentUser} = useContext(AuthContext)
@@ -65,7 +80,7 @@ const Share = () => {
         <div className="top">
           <div className="left">
           <img
-            src={"../client/" + currentUser.profilePic}
+            src={ currentUser.profilePic}
             alt=""
           />
           <input type="text" placeholder={`What's on your mind ${currentUser.name}?`} onChange={(e)=>{ setdescription(e.target.value) }} name ='descriptionription' 
