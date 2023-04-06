@@ -10,7 +10,7 @@ const Notificatins = ({notify})=>{
   const {currentUser} = useContext(AuthContext);
   const location = async ()=>{
 
-    const location = await axios.get("http://localhost:8800/api/locations?userID=" + currentUser.id + "personalID=?" + currentUser.id , {withCredentials:true})
+    const location = await axios.get(`${HOST}/api/locations?userID=` + currentUser.id + "personalID=?" + currentUser.id , {withCredentials:true})
     return location.data;
 
   }
