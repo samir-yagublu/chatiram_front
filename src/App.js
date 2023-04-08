@@ -42,7 +42,7 @@ function App() {
           <Outlet/>
           </div>
          
-          <Rightbar/>
+        
         </div>
       </div>
       </QueryClientProvider>
