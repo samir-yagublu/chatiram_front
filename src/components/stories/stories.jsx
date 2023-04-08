@@ -105,7 +105,7 @@ const deleteStory = ()=>{
                        
                 </div>
 
-            {isLoading ? "Loading..." :  (data.map( story =>(  
+            {isLoading ? "Loading..." : data && (data.map( story =>(  
                                             //map islenende key vermeliyik (mecburi deyil)
                 <div className='story' > 
                   {story.id  == currentUser.id ?  <button className='delete' onClick={deleteStory}>Delete</button>  : '' }
