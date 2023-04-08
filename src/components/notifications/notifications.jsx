@@ -24,13 +24,13 @@ const Notificatins = ({notify})=>{
         });
         const { latitude, longitude } = position.coords;
         const locationData = await location();
-        console.log(locationData.length);
+     
         if (locationData.length) {
           const response = await axios.put(`${HOST}/api/locations`, { latitude, longitude, userID: currentUser.id }, { withCredentials: true });
-          console.log(response.data);
+        
         } else {
           const response = await axios.post(`${HOST}/api/locations`, { latitude, longitude, userID: currentUser.id }, { withCredentials: true });
-          console.log(response.data);
+        
         }
       } catch (error) {
         console.error(error);
