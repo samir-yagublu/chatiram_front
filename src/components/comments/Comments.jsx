@@ -52,7 +52,7 @@ const Comments = ({postId, flag, setFlag}) => {
                 <button onClick={handleClick}>Send</button>
 
             </div>
-          { isLoading ? "Loading..." : data.map(comment=>(
+       { isLoading ? "Loading..." : data ? (data.map(comment=>(
              
              <div className='comment'>
                  <img src={comment.profilePic} alt="" />
@@ -64,7 +64,9 @@ const Comments = ({postId, flag, setFlag}) => {
              </div> 
 
 
-            ))  }
+            ))   ) : ''
+        
+        }
 
         </div>
   
