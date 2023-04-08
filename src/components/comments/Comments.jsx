@@ -27,7 +27,6 @@ const Comments = ({postId, flag, setFlag}) => {
 
       onSuccess: () =>{
         queryClient.invalidateQueries('comments') //datamiz elave olunan kimi re-fetch edecek
-        console.log(data.length)
         setFlag(!flag);
 
       } 
