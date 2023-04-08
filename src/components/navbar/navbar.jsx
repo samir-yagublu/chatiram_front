@@ -132,7 +132,7 @@ getData();
                 <PersonOutlineIcon/>
                 <ChatIcon/>
                 
-                {isLoading ? "" :  (data.length  && data.every(noti => noti.isAccepted === 0) ?  <span className="dot" onClick={()=> setNotification(!notification)} >.</span> : '' )}
+                {isLoading ? "" : data && (data.length  && data.every(noti => noti.isAccepted === 0) ?  <span className="dot" onClick={()=> setNotification(!notification)} >.</span> : '' )}
              
 
                 <CircleNotificationsIcon/>
